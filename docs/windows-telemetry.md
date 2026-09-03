@@ -1,31 +1,12 @@
-# Windows Telemetry
+# Telemetry Inventory
 
-## Sysmon
+## Current Windows sources
 
-### Event ID 1 — Process Creation
+The Windows endpoint is enrolled in the `windows-detection-lab` Fleet policy with the System and Windows integrations.
 
-Purpose:
-Records creation of a new process.
-
-Useful fields:
-- Image
-- CommandLine
-- ParentImage
-- ParentCommandLine
-- User
-- ProcessGuid
-- ProcessId
-- Hashes
-
-Elastic ECS mappings observed:
-- Image → process.executable
-- CommandLine → process.command_line
-- ParentImage → process.parent.executable
-- ProcessId → process.pid
-
-Detection uses:
-- Suspicious PowerShell
-- LOLBins
-- Office spawning script interpreters
-- Unexpected process ancestry
-- Encoded command execution
+| Source | Dataset or channel | Detection value |
+|---|---|---|
+| Sysmon | `windows.sysmon_operational` | Process creation and other enriched host activity |
+| PowerShell | Windows PowerShell operational logs | Script and engine activity when enabled by policy |
+| Windows Defender | Microsoft Defender operational logs | Antivirus and protection events |
+| Windows System/Security | Windows event logs | Authentication and operating-system context |
